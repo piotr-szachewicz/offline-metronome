@@ -1,6 +1,6 @@
 var Metronome = function() {
   this.clickSound = new Audio('click.mp3');
-  this.worker = new Worker('worker.js');
+  this.worker = new Worker('build/worker.js');
 
   this.worker.addEventListener('message', this._playClick.bind(this));
 };
