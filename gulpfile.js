@@ -6,10 +6,6 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var es = require('event-stream');
 
-gulp.task('webserver', function() {
-  connect.server();
-});
-
 gulp.task('js', function() {
   var files = ['worker.js', 'index.js'];
 
@@ -22,6 +18,10 @@ gulp.task('js', function() {
   });
 
   es.merge.apply(null, tasks);
+});
+
+gulp.task('webserver', ['js'], function() {
+  connect.server();
 });
 
 gulp.task('default', ['webserver']);
