@@ -20762,6 +20762,14 @@ var ReactDOM = require('react-dom');
 var React = require('react');
 var MetronomeView = require('./metronome-view.js');
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js', { scope: './' }).then(function (reg) {
+    console.log('Registration succeeded.');
+  }).catch(function (error) {
+    console.log('Registration failed with ' + error);
+  });
+}
+
 ReactDOM.render(React.createElement(MetronomeView, null), document.getElementById('app'));
 
 },{"./metronome-view.js":173,"react":171,"react-dom":28}],173:[function(require,module,exports){
