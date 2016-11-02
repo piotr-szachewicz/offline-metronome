@@ -7,7 +7,7 @@ var babelify = require('babelify');
 var es = require('event-stream');
 
 gulp.task('js', function() {
-  var files = ['worker.js', 'index.js', 'sw.js'];
+  var files = ['worker.js', 'index.js'];
 
   var tasks = files.map(function(file) {
     return browserify('./src/' + file)
