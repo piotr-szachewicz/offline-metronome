@@ -38,10 +38,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return <div>
-      <input type='number' onChange={this.valueChanged} value={this.state.bpm} min='1' max='300'/>
-      <button type="button" onClick={this.startClicked}>Start</button>
-      <button type="button" onClick={this.stopClicked}>Stop</button>
-    </div>;
+    return <form className="form-inline text-center">
+      <div className="form-group">
+        <label for="bpm">BPM:</label>
+        <input id="bpm" className="form-control" type='number' onChange={this.valueChanged} value={this.state.bpm} min='1' max='300'/>
+      </div>
+      <button type="button" className="btn btn-primary" onClick={this.startClicked}>Start</button>
+      <button type="button" className="btn btn-warning" onClick={this.stopClicked}>Stop</button>
+    </form>;
   }
 });
