@@ -37,7 +37,7 @@ module.exports = React.createClass({
     }
   },
 
-  render: function() {
+  form: function() {
     return <form className="form-inline text-center">
       <div className="form-group">
         <label for="bpm">BPM:</label>
@@ -46,5 +46,12 @@ module.exports = React.createClass({
       <button type="button" className="btn btn-primary" onClick={this.startClicked}>Start</button>
       <button type="button" className="btn btn-warning" onClick={this.stopClicked}>Stop</button>
     </form>;
+  },
+
+  render: function() {
+    return <div className="content">
+      <h1>Offline metronome</h1>
+      { this.form() }
+    </div>;
   }
 });

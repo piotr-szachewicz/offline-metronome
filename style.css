@@ -1,0 +1,19 @@
+html, body, div#app {
+  height: 100%;
+}
+
+body {
+  background-color: #333;
+  color: white;
+}
+
+div#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form * {
+  margin: 3px;
+}
+
