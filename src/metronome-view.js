@@ -3,23 +3,29 @@ var React = require('react');
 var Metronome = require('./metronome');
 
 module.exports = class MetronomeView extends React.Component {
-  getInitialState() {
-    return {
+  constructor() {
+    super();
+
+    this.state = {
       bpm: 90,
       switchedOn: false
     };
+
+    this._valueChanged = this._valueChanged.bind(this)
+    this._startClicked = this._startClicked.bind(this)
+    this._stopClicked = this._stopClicked.bind(this)
   }
 
-  valueChanged() {
+  _valueChanged(ev) {
     var value = parseInt(ev.target.value);
     this.setState({bpm: value})
   }
 
-  startClicked(ev) {
+  _startClicked(ev) {
     this.setState({switchedOn: true});
   }
 
-  stopClicked(ev) {
+  _stopClicked(ev) {
     this.setState({switchedOn: false});
   }
 
@@ -40,11 +46,11 @@ module.exports = class MetronomeView extends React.Component {
   get form() {
     return <form className="form-inline text-center">
       <div className="form-group">
-        <label for="bpm">BPM:</label>
-        <input id="bpm" className="form-control" type='number' onChange={this.valueChanged} value={this.state.bpm} min='1' max='300'/>
+        <label htmlFor="bpm">BPM:</label>
+        <input id="bpm" className="form-control" type='number' onChange={this._valueChanged} value={this.state.bpm} min='1' max='300'/>
       </div>
-      <button type="button" className="btn btn-primary" onClick={this.startClicked}>Start</button>
-      <button type="button" className="btn btn-warning" onClick={this.stopClicked}>Stop</button>
+      <button type="button" className="btn btn-primary" onClick={this._startClicked}>Start</button>
+      <button type="button" className="btn btn-warning" onClick={this._stopClicked}>Stop</button>
     </form>;
   }
 
