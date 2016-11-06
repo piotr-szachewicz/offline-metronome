@@ -11,9 +11,13 @@ div#app {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  -webkit-box-shadow: inset 0 0 5rem rgba(0,0,0,.5);
+  box-shadow: inset 0 0 5rem rgba(0,0,0,.5);
 }
 
 form * {
   margin: 3px;
 }
+
 
