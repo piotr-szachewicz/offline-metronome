@@ -4,11 +4,11 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open('online-metronome-v3').then(function(cache) {
       return cache.addAll([
-        '/',
         'style/style.css',
         'style/bootstrap.min.css',
         'build/index.js',
-        'build/worker.js'
+        'build/worker.js',
+        'https://piotr-szachewicz.github.io/online-metronome/'
       ]);
     })
   );
