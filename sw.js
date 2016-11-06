@@ -5,6 +5,8 @@ self.addEventListener('install', function(event) {
     caches.open('online-metronome-v1').then(function(cache) {
       return cache.addAll([
         '/',
+        'style.css',
+        'node_modules/bootstrap/dist/css/bootstrap.min.css',
         'build/index.js',
         'build/worker.js'
       ]);
