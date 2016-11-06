@@ -1,28 +1,30 @@
-var Metronome = function() {
-  this.clickSound = new Audio('click.mp3');
-  this.worker = new Worker('build/worker.js');
+class Metronome {
+  constructor() {
+    this.clickSound = new Audio('click.mp3');
+    this.worker = new Worker('build/worker.js');
 
-  this.worker.addEventListener('message', this._playClick.bind(this));
-};
+    this.worker.addEventListener('message', this._playClick.bind(this));
+  }
 
-Metronome.prototype.start = function() {
-  this.worker.postMessage({type: 'start', interval: this._intervalMs()});
-};
+  start() {
+    this.worker.postMessage({type: 'start', interval: this._intervalMs()});
+  }
 
-Metronome.prototype.stop = function() {
-  this.worker.postMessage({type: 'stop'});
-};
+  stop() {
+    this.worker.postMessage({type: 'stop'});
+  }
 
-Metronome.prototype.setBpm = function(bpm) {
-  this.bpm = bpm;
-};
+  setBpm(bpm) {
+    this.bpm = bpm;
+  }
 
-Metronome.prototype._intervalMs = function() {
-  return 60000/this.bpm;
-};
+  _intervalMs() {
+    return 60000/this.bpm;
+  }
 
-Metronome.prototype._playClick = function() {
-  this.clickSound.play();
-};
+  _playClick() {
+    this.clickSound.play();
+  }
+}
 
 module.exports = Metronome;
