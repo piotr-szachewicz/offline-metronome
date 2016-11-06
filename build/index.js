@@ -20775,95 +20775,162 @@ ReactDOM.render(React.createElement(MetronomeView, null), document.getElementByI
 },{"./metronome-view.js":173,"react":171,"react-dom":28}],173:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var ReactDOM = require('react-dom');
 var React = require('react');
 var Metronome = require('./metronome');
 
-module.exports = React.createClass({
-  displayName: 'exports',
+module.exports = function (_React$Component) {
+  _inherits(MetronomeView, _React$Component);
 
-  getInitialState: function getInitialState() {
-    return {
+  function MetronomeView() {
+    _classCallCheck(this, MetronomeView);
+
+    var _this = _possibleConstructorReturn(this, (MetronomeView.__proto__ || Object.getPrototypeOf(MetronomeView)).call(this));
+
+    _this.state = {
       bpm: 90,
       switchedOn: false
     };
-  },
 
-  valueChanged: function valueChanged(ev) {
-    var value = parseInt(ev.target.value);
-    this.setState({ bpm: value });
-  },
-
-  startClicked: function startClicked(ev) {
-    this.setState({ switchedOn: true });
-  },
-
-  stopClicked: function stopClicked(ev) {
-    this.setState({ switchedOn: false });
-  },
-
-  componentWillMount: function componentWillMount() {
-    this.metronome = new Metronome();
-    this.metronome.setBpm(this.state.bpm);
-  },
-  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-    this.metronome.stop();
-
-    if (this.state.switchedOn) {
-      this.metronome.setBpm(this.state.bpm);
-      this.metronome.start();
-    }
-  },
-
-
-  render: function render() {
-    return React.createElement(
-      'div',
-      null,
-      React.createElement('input', { type: 'number', onChange: this.valueChanged, value: this.state.bpm, min: '1', max: '300' }),
-      React.createElement(
-        'button',
-        { type: 'button', onClick: this.startClicked },
-        'Start'
-      ),
-      React.createElement(
-        'button',
-        { type: 'button', onClick: this.stopClicked },
-        'Stop'
-      )
-    );
+    _this._valueChanged = _this._valueChanged.bind(_this);
+    _this._startClicked = _this._startClicked.bind(_this);
+    _this._stopClicked = _this._stopClicked.bind(_this);
+    return _this;
   }
-});
+
+  _createClass(MetronomeView, [{
+    key: '_valueChanged',
+    value: function _valueChanged(ev) {
+      var value = parseInt(ev.target.value);
+      this.setState({ bpm: value });
+    }
+  }, {
+    key: '_startClicked',
+    value: function _startClicked(ev) {
+      this.setState({ switchedOn: true });
+    }
+  }, {
+    key: '_stopClicked',
+    value: function _stopClicked(ev) {
+      this.setState({ switchedOn: false });
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.metronome = new Metronome();
+      this.metronome.setBpm(this.state.bpm);
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      this.metronome.stop();
+
+      if (this.state.switchedOn) {
+        this.metronome.setBpm(this.state.bpm);
+        this.metronome.start();
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'content' },
+        React.createElement(
+          'h1',
+          null,
+          'Offline metronome'
+        ),
+        this.form
+      );
+    }
+  }, {
+    key: 'form',
+    get: function get() {
+      return React.createElement(
+        'form',
+        { className: 'form-inline text-center' },
+        React.createElement(
+          'div',
+          { className: 'form-group' },
+          React.createElement(
+            'label',
+            { htmlFor: 'bpm' },
+            'BPM:'
+          ),
+          React.createElement('input', { id: 'bpm', className: 'form-control', type: 'number', onChange: this._valueChanged, value: this.state.bpm, min: '1', max: '300' })
+        ),
+        React.createElement(
+          'button',
+          { type: 'button', className: 'btn btn-primary', onClick: this._startClicked },
+          'Start'
+        ),
+        React.createElement(
+          'button',
+          { type: 'button', className: 'btn btn-warning', onClick: this._stopClicked },
+          'Stop'
+        )
+      );
+    }
+  }]);
+
+  return MetronomeView;
+}(React.Component);
 
 },{"./metronome":174,"react":171,"react-dom":28}],174:[function(require,module,exports){
 'use strict';
 
-var Metronome = function Metronome() {
-  this.clickSound = new Audio('click.mp3');
-  this.worker = new Worker('build/worker.js');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-  this.worker.addEventListener('message', this._playClick.bind(this));
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-Metronome.prototype.start = function () {
-  this.worker.postMessage({ type: 'start', interval: this._intervalMs() });
-};
+var Metronome = function () {
+  function Metronome() {
+    _classCallCheck(this, Metronome);
 
-Metronome.prototype.stop = function () {
-  this.worker.postMessage({ type: 'stop' });
-};
+    this.clickSound = new Audio('click.mp3');
+    this.worker = new Worker('build/worker.js');
 
-Metronome.prototype.setBpm = function (bpm) {
-  this.bpm = bpm;
-};
+    this.worker.addEventListener('message', this._playClick.bind(this));
+  }
 
-Metronome.prototype._intervalMs = function () {
-  return 60000 / this.bpm;
-};
+  _createClass(Metronome, [{
+    key: 'start',
+    value: function start() {
+      this.worker.postMessage({ type: 'start', interval: this._intervalMs() });
+    }
+  }, {
+    key: 'stop',
+    value: function stop() {
+      this.worker.postMessage({ type: 'stop' });
+    }
+  }, {
+    key: 'setBpm',
+    value: function setBpm(bpm) {
+      this.bpm = bpm;
+    }
+  }, {
+    key: '_intervalMs',
+    value: function _intervalMs() {
+      return 60000 / this.bpm;
+    }
+  }, {
+    key: '_playClick',
+    value: function _playClick() {
+      this.clickSound.play();
+    }
+  }]);
 
-Metronome.prototype._playClick = function () {
-  this.clickSound.play();
-};
+  return Metronome;
+}();
 
 module.exports = Metronome;
 
