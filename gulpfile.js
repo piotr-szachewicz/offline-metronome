@@ -7,14 +7,14 @@ var babelify = require('babelify');
 var es = require('event-stream');
 
 gulp.task('js', function() {
-  var files = ['worker.js', 'index.js'];
+  var files = ['js/worker.js', 'js/index.js', 'sw.js'];
 
-  var tasks = files.map(function(file) {
-    return browserify('./src/js/' + file)
+  var tasks = files.map(function(file, index) {
+    return browserify('./src/' + file)
       .transform(babelify, { presets: ['es2015', 'react'] })
       .bundle()
       .pipe(source(file))
-      .pipe(gulp.dest('./dist/js'))
+      .pipe(gulp.dest('./dist/'))
   });
 
   es.merge.apply(null, tasks);
