@@ -9,7 +9,7 @@ var es = require('event-stream');
 gulp.task('js', function() {
   var files = ['js/worker.js', 'js/index.js', 'sw.js'];
 
-  var tasks = files.map(function(file, index) {
+  var tasks = files.map(function(file) {
     return browserify('./src/' + file)
       .transform(babelify, { presets: ['es2015', 'react'] })
       .bundle()
@@ -20,14 +20,19 @@ gulp.task('js', function() {
   es.merge.apply(null, tasks);
 });
 
-gulp.task('bootstrap', function() {
+gulp.task('css', function() {
   return gulp
-    .src('node_modules/bootstrap/dist/css/bootstrap.min.css')
+    .src(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'src/css/style.css'])
     .pipe(gulp.dest('dist/css/'));
-
 });
 
-gulp.task('webserver', ['js', 'bootstrap'], function() {
+gulp.task('other_files', function() {
+  return gulp
+    .src(['src/index.html', 'src/click.mp3'])
+    .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('webserver', ['js', 'css', 'other_files'], function() {
   connect.server({root: 'dist'});
 });
 
