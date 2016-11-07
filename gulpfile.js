@@ -20,7 +20,14 @@ gulp.task('js', function() {
   es.merge.apply(null, tasks);
 });
 
-gulp.task('webserver', ['js'], function() {
+gulp.task('bootstrap', function() {
+  return gulp
+    .src('node_modules/bootstrap/dist/css/bootstrap.min.css')
+    .pipe(gulp.dest('dist/css/'));
+
+});
+
+gulp.task('webserver', ['js', 'bootstrap'], function() {
   connect.server({root: 'dist'});
 });
 
