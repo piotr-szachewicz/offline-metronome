@@ -20897,7 +20897,7 @@ var Metronome = function () {
     _classCallCheck(this, Metronome);
 
     this.clickSound = new Audio('click.mp3');
-    this.worker = new Worker('build/worker.js');
+    this.worker = new Worker('js/worker.js');
 
     this.worker.addEventListener('message', this._playClick.bind(this));
   }
