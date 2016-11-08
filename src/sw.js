@@ -2,13 +2,13 @@ self.addEventListener('install', (event) => {
   console.log('installing my first service worker');
 
   event.waitUntil(
-    caches.open('online-metronome-v3').then((cache) => {
+    caches.open('online-metronome-v4').then((cache) => {
       return cache.addAll([
         '/',
-        'style/style.css',
-        'style/bootstrap.min.css',
-        'build/index.js',
-        'build/worker.js'
+        'css/style.css',
+        'css/bootstrap.min.css',
+        'js/index.js',
+        'js/worker.js'
       ]);
     })
   );
