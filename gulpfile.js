@@ -32,7 +32,9 @@ gulp.task('other_files', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('webserver', ['js', 'css', 'other_files'], function() {
+gulp.task('dist', ['js', 'css', 'other_files']);
+
+gulp.task('webserver', ['dist'], function() {
   connect.server({root: 'dist'});
 });
 
